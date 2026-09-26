@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker - Modern Fitness & Health Tracker</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/modules.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+
+    
+    <section id="auth-section" class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo-badge">⚡</div>
+                <h1>FitPulse</h1>
+                <p>Track your physical activity, diet & wearable health vitals</p>
+            </div>
+
+            
+            <div class="auth-tabs">
+                <button type="button" id="auth-tab-login" class="auth-tab active">Log In</button>
+                <button type="button" id="auth-tab-register" class="auth-tab">Create Account</button>
+            </div>
+
+           
+            <form id="form-login">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="alex@fitpulse.io" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+                    Log In to Dashboard
+                </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="form-register" class="hidden">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" class="form-control" placeholder="Alex Mercer" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" class="form-control" placeholder="alex@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-weight">Current Weight (kg)</label>
+                        <input type="number" id="reg-weight" class="form-control" value="74" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-height">Height (cm)</label>
+                        <input type="number" id="reg-height" class="form-control" value="176" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="reg-age">Age</label>
+                        <input type="number" id="reg-age" class="form-control" value="28" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-gender">Gender</label>
+                        <select id="reg-gender" class="form-control">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-goal">Primary Fitness Goal</label>
+                    <select id="reg-goal" class="form-control">
+                        <option value="fat_loss">Fat Loss & Definition (Calorie Deficit)</option>
+                        <option value="muscle_gain">Muscle Hypertrophy & Strength (Calorie Surplus)</option>
+                        <option value="endurance">Cardiovascular Endurance & Stamina</option>
+                        <option value="maintenance">Healthy Weight Maintenance & Vitality</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+                    Create Account & Start Tracking
+                </button>
+            </form>
+
+            <!-- 1-Click Demo Account Quick Access -->
+            <div class="demo-login-box">
+                <button type="button" id="btn-demo-login" class="btn-demo">
+                    <span>✨</span> One-Click Demo Account (Instant Access)
+                </button>
+                <span class="demo-hint">Preloaded with 14 days of realistic workouts, meals, steps & sleep telemetry</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         MAIN APPLICATION CONTAINER
+         ========================================================================== -->
+    <section id="app-section" class="hidden">
+        <!-- Top Sticky Header -->
+        <header class="app-header">
+            <div class="header-brand" data-tab="dashboard">
+                <div class="brand-icon">⚡</div>
+                <span class="brand-title">Fitness Tracker</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="header-nav">
+                <button type="button" class="nav-link active" data-tab="dashboard">
+                    <span>📊</span> Dashboard
+                </button>
+                <button type="button" class="nav-link" data-tab="workouts">
+                    <span>🏋️</span> Workouts
+                </button>
+                <button type="button" class="nav-link" data-tab="diet">
+                    <span>🥗</span> Nutrition
+                </button>
+                <button type="button" class="nav-link" data-tab="wearable">
+                    <span>⌚</span> Wearable Hub
+                </button>
+                <button type="button" class="nav-link" data-tab="analytics">
+                    <span>📈</span> Reports
+                </button>
+                <button type="button" class="nav-link" data-tab="goals">
+                    <span>🎯</span> Goals
+                </button>
+            </nav>
+
+            <!-- User Pill & Actions -->
+            <div class="header-actions">
+                <button type="button" class="btn btn-sm btn-secondary" id="btn-quick-sync-wearable" title="Sync Wearable Data">
+                    ⚡ Sync Watch
+                </button>
+                <div class="user-profile-pill" id="btn-open-edit-goals" title="Customize Goals & Profile">
+                    <div class="user-avatar-circle user-avatar-initials">AM</div>
+                    <span class="user-display-name">Alex Mercer</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-secondary btn-logout" title="Log Out">
+                    Log Out
+                </button>
+            </div>
+        </header>
+
+        <!-- Main View Area -->
+        <main class="main-container">
+
+            <!-- ==============================================================
+                 VIEW 1: DASHBOARD
+                 ============================================================== -->
+            <div id="view-dashboard" class="app-view">
+                <div class="view-header">
+                    <div class="view-title-group">
+                        <h2>Health & Activity Summary</h2>
+                        <p>Welcome back, <span class="user-display-name">Alex</span>! Here is your daily momentum.</p>
+                    </div>
+                </div>
+
+                <!-- Quick Action Buttons -->
+                <div class="quick-actions-bar">
+                    <button type="button" class="btn-quick-action btn-quick-action-primary" data-modal-open="modal-log-workout">
+                        <span>+</span> Log Workout
+                    </button>
+                    <button type="button" class="btn-quick-action" data-modal-open="modal-log-meal">
+                        <span>+</span> Log Meal
+                    </button>
+                    <button type="button" class="btn-quick-action" id="btn-quick-water-250">
+                        <span>💧</span> +250ml Water
+                    </button>
+                    <button type="button" class="btn-quick-action" id="btn-quick-water-500">
+                        <span>💧</span> +500ml Water
+                    </button>
+                    <button type="button" class="btn-quick-action" id="btn-quick-step-1k">
+                        <span>👟</span> +1,000 Steps
+                    </button>
+                </div>
+
+                <!-- Personalized Recommendations Banner -->
+                <div id="recommendation-banner" class="recommendation-banner hidden">
+                    <!-- Injected dynamically by recommendations.js -->
+                </div>
+
+                <!-- Upper Dashboard Grid (Rings + 4 Metric Cards) -->
+                <div class="dashboard-grid">
+                    <!-- Apple-Style Activity Rings -->
+                    <div class="card rings-card">
+                        <h3>Today's Rings</h3>
+                        <div class="rings-container">
+                            <svg class="activity-rings-svg" viewBox="0 0 140 140">
+                                <!-- Ring 1: Move (Active Calories) -->
+                                <circle class="ring-bg ring-move-bg" cx="70" cy="70" r="58" />
+                                <circle id="ring-move" class="ring-fg ring-move-fg" cx="70" cy="70" r="58"
+                                    stroke-dasharray="364.42" stroke-dashoffset="364.42" />
+
+                                <!-- Ring 2: Exercise (Minutes) -->
+                                <circle class="ring-bg ring-exercise-bg" cx="70" cy="70" r="44" />
+                                <circle id="ring-exercise" class="ring-fg ring-exercise-fg" cx="70" cy="70" r="44"
+                                    stroke-dasharray="276.46" stroke-dashoffset="276.46" />
+
+                                <!-- Ring 3: Stand / Movement (Hours) -->
+                                <circle class="ring-bg ring-stand-bg" cx="70" cy="70" r="30" />
+                                <circle id="ring-stand" class="ring-fg ring-stand-fg" cx="70" cy="70" r="30"
+                                    stroke-dasharray="188.50" stroke-dashoffset="188.50" />
+                            </svg>
+                            <div class="rings-center-icon">⚡</div>
+                        </div>
+
+                        <!-- Rings Legend -->
+                        <div class="rings-legend">
+                            <div class="ring-legend-item">
+                                <div class="ring-legend-left">
+                                    <span class="ring-dot dot-coral"></span>
+                                    <span>Move (Burn)</span>
+                                </div>
+                                <strong id="ring-move-val">0 / 500 kcal</strong>
+                            </div>
+                            <div class="ring-legend-item">
+                                <div class="ring-legend-left">
+                                    <span class="ring-dot dot-lime"></span>
+                                    <span>Exercise</span>
+                                </div>
+                                <strong id="ring-exercise-val">0 / 45 min</strong>
+                            </div>
+                            <div class="ring-legend-item">
+                                <div class="ring-legend-left">
+                                    <span class="ring-dot dot-cyan"></span>
+                                    <span>Stand</span>
+                                </div>
+                                <strong id="ring-stand-val">0 / 12 hrs</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Metric Cards Grid -->
+                    <div class="metrics-grid">
+                        <!-- Metric 1: Steps -->
+                        <div class="card metric-card">
+                            <div class="metric-card-header">
+                                <span class="metric-title">Daily Steps</span>
+                                <div class="metric-icon-badge">👟</div>
+                            </div>
+                            <div>
+                                <div class="metric-val-large" id="dash-steps-val">0</div>
+                                <div class="metric-sub" id="dash-steps-goal">/ 10,000 steps</div>
+                                <div class="metric-progress-wrap">
+                                    <div id="dash-steps-bar" class="metric-progress-bar bar-lime" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <div class="metric-sub" id="dash-steps-distance" style="margin-top: 0.5rem;">0.00 km walked</div>
+                        </div>
+
+                        <!-- Metric 2: Calories Balance -->
+                        <div class="card metric-card">
+                            <div class="metric-card-header">
+                                <span class="metric-title">Calorie Balance</span>
+                                <div class="metric-icon-badge">🔥</div>
+                            </div>
+                            <div>
+                                <div class="metric-val-large">
+                                    <span id="dash-cal-consumed">0</span> <span style="font-size: 1rem; color: var(--text-muted);">in</span>
+                                </div>
+                                <div class="metric-sub">
+                                    Burned: <strong id="dash-cal-burned" class="text-coral">0</strong> kcal | Net: <strong id="dash-cal-net">0 kcal</strong>
+                                </div>
+                                <div class="metric-progress-wrap">
+                                    <div id="dash-cal-bar" class="metric-progress-bar bar-coral" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <div class="metric-sub" style="margin-top: 0.5rem;">Active Burn & Diet Tracking</div>
+                        </div>
+
+                        <!-- Metric 3: Hydration -->
+                        <div class="card metric-card">
+                            <div class="metric-card-header">
+                                <span class="metric-title">Water Hydration</span>
+                                <div class="metric-icon-badge">💧</div>
+                            </div>
+                            <div>
+                                <div class="metric-val-large" id="dash-water-val">0.0 L</div>
+                                <div class="metric-sub" id="dash-water-goal">/ 2.5 L Goal (<span id="dash-water-pct">0%</span>)</div>
+                                <div class="metric-progress-wrap">
+                                    <div id="dash-water-bar" class="metric-progress-bar bar-cyan" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <div class="metric-sub" style="margin-top: 0.5rem;">Fluid balance is optimal for muscle recovery</div>
+                        </div>
+
+                        <!-- Metric 4: Wearable Vitals -->
+                        <div class="card metric-card">
+                            <div class="metric-card-header">
+                                <span class="metric-title">Wearable Vitals</span>
+                                <div class="metric-icon-badge">⌚</div>
+                            </div>
+                            <div>
+                                <div class="metric-val-large">
+                                    <span id="dash-bpm-val" class="text-coral">72</span> <span style="font-size: 1rem; color: var(--text-muted);">BPM</span>
+                                </div>
+                                <div class="metric-sub">
+                                    Sleep: <strong id="dash-sleep-val">7h 24m</strong> • <span id="dash-sleep-score">Score: 86/100</span>
+                                </div>
+                                <div class="metric-progress-wrap">
+                                    <div class="metric-progress-bar bar-purple" style="width: 86%;"></div>
+                                </div>
+                            </div>
+                            <div class="metric-sub" style="margin-top: 0.5rem;">Connected to FitPulse Watch Ultra</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lower Dashboard: Today's Timeline Feed -->
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="timeline-card-header">
+                        <div>
+                            <h3>Today's Activity & Meals Feed</h3>
+                            <p>Real-time chronological log of exercises and nutrition</p>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button type="button" class="btn btn-sm btn-secondary" data-modal-open="modal-log-workout">+ Workout</button>
+                            <button type="button" class="btn btn-sm btn-secondary" data-modal-open="modal-log-meal">+ Meal</button>
+                        </div>
+                    </div>
+                    <div id="today-feed-list" class="timeline-list">
+                        <!-- Rendered by dashboard.js -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 VIEW 2: WORKOUTS
+                 ============================================================== -->
+            <div id="view-workouts" class="app-view hidden">
+                <div class="view-header">
+                    <div class="view-title-group">
+                        <h2>Workouts & Training</h2>
+                        <p>Track exercises, live stopwatch timing, and estimated calories burned</p>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-modal-open="modal-log-workout">
+                        <span>+</span> Log Workout
+                    </button>
+                </div>
+
+                <!-- Summary Row -->
+                <div class="workout-stats-row">
+                    <div class="card metric-card">
+                        <span class="metric-title">Workouts This Week</span>
+                        <div class="metric-val-large text-success" id="wo-stat-count">0</div>
+                        <span class="metric-sub">Consistency target: 5 sessions</span>
+                    </div>
+                    <div class="card metric-card">
+                        <span class="metric-title">Active Time</span>
+                        <div class="metric-val-large text-cyan" id="wo-stat-mins">0m</div>
+                        <span class="metric-sub">Total training minutes</span>
+                    </div>
+                    <div class="card metric-card">
+                        <span class="metric-title">Calories Burned</span>
+                        <div class="metric-val-large text-coral" id="wo-stat-cals">0</div>
+                        <span class="metric-sub">Active training energy expenditure</span>
+                    </div>
+                </div>
+
+                <!-- Live Workout Stopwatch / Timer -->
+                <div class="timer-card">
+                    <span class="badge badge-subtle">⏱ Live Session Stopwatch</span>
+                    <div class="timer-display" id="timer-display">00:00</div>
+                    <div class="timer-controls">
+                        <button type="button" class="btn btn-primary" id="timer-start">
+                            ▶ Start Workout
+                        </button>
+                        <button type="button" class="btn btn-secondary hidden" id="timer-pause">
+                            ⏸ Pause
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="timer-reset">
+                            ↺ Reset
+                        </button>
+                        <button type="button" class="btn btn-primary" id="timer-finish" style="background: var(--gradient-cyan); color: #0c1017;">
+                            ✓ Finish & Log Session
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters & Search -->
+                <div class="filter-bar">
+                    <select id="wo-filter-category" class="form-control" style="width: auto; min-width: 170px;">
+                        <option value="all">All Disciplines</option>
+                        <option value="Cardio">Cardio & Running</option>
+                        <option value="Strength">Strength & Weights</option>
+                        <option value="HIIT">HIIT & Circuits</option>
+                        <option value="Cycling">Cycling</option>
+                        <option value="Flexibility">Yoga & Flexibility</option>
+                    </select>
+                    <input type="text" id="wo-search" class="form-control" placeholder="Search exercises, notes..." style="max-width: 320px;">
+                </div>
+
+                <!-- Workout Log Cards List -->
+                <div id="workouts-list" class="workouts-list">
+                    <!-- Rendered by workouts.js -->
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 VIEW 3: DIET & NUTRITION
+                 ============================================================== -->
+            <div id="view-diet" class="app-view hidden">
+                <div class="view-header">
+                    <div class="view-title-group">
+                        <h2>Diet & Nutrition Tracker</h2>
+                        <p>Monitor daily calorie budget, macronutrient breakdown, and hydration</p>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-modal-open="modal-log-meal">
+                        <span>+</span> Log Meal
+                    </button>
+                </div>
+
+                <!-- Diet Summary: Calorie Budget + Water Glass -->
+                <div class="diet-summary-grid">
+                    <!-- Calorie Budget & Macros -->
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <h3>Daily Calorie Budget</h3>
+                                <p>Target: <strong id="diet-cal-target">2,200 kcal</strong> | <span id="diet-cal-burned" class="text-coral">+0 burned</span></p>
+                            </div>
+                            <div style="text-align: right;">
+                                <span class="metric-sub">Remaining</span>
+                                <div class="metric-val-large text-success" id="diet-cal-remaining">2,200</div>
+                            </div>
+                        </div>
+
+                        <div class="metric-progress-wrap" style="height: 10px; margin-bottom: 1.5rem;">
+                            <div id="diet-cal-progressbar" class="metric-progress-bar bar-lime" style="width: 0%;"></div>
+                        </div>
+
+                        <!-- Macro Distribution -->
+                        <div class="macro-bars-grid">
+                            <div class="macro-box">
+                                <div class="macro-box-header">
+                                    <span>Protein</span>
+                                    <span id="macro-protein-target">/ 165g</span>
+                                </div>
+                                <div class="macro-box-val text-cyan" id="macro-protein-val">0g</div>
+                                <div class="macro-bar-wrap">
+                                    <div id="macro-protein-bar" class="macro-bar-fill bar-protein" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <div class="macro-box">
+                                <div class="macro-box-header">
+                                    <span>Carbohydrates</span>
+                                    <span id="macro-carbs-target">/ 240g</span>
+                                </div>
+                                <div class="macro-box-val text-success" id="macro-carbs-val">0g</div>
+                                <div class="macro-bar-wrap">
+                                    <div id="macro-carbs-bar" class="macro-bar-fill bar-carbs" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <div class="macro-box">
+                                <div class="macro-box-header">
+                                    <span>Healthy Fats</span>
+                                    <span id="macro-fat-target">/ 60g</span>
+                                </div>
+                                <div class="macro-box-val text-coral" id="macro-fat-val">0g</div>
+                                <div class="macro-bar-wrap">
+                                    <div id="macro-fat-bar" class="macro-bar-fill bar-fat" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Water Tracker Visualizer -->
+                    <div class="card water-card">
+                        <h3>Hydration Station</h3>
+                        <p id="diet-water-text">0.0 / 2.5 L</p>
+                        <div class="water-bottle-cap"></div>
+                        <div class="water-bottle-wrap">
+                            <div id="water-fluid-level" class="water-fluid-level" style="height: 0%;"></div>
+                        </div>
+                        <strong id="diet-water-pct" class="text-cyan">0%</strong>
+                        <div class="water-quick-buttons">
+                            <button type="button" class="btn btn-sm btn-secondary" id="diet-water-add-250">+250ml</button>
+                            <button type="button" class="btn btn-sm btn-secondary" id="diet-water-add-500">+500ml</button>
+                            <button type="button" class="btn btn-sm btn-secondary" id="diet-water-sub-250">-250ml</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meals Grouped List -->
+                <div class="view-header" style="margin-top: 2rem;">
+                    <div>
+                        <h3>Meals Logged Today</h3>
+                        <p>Tracked meals, snacks, and macronutrients</p>
+                    </div>
+                </div>
+                <div id="meals-list-container" class="meals-grid">
+                    <!-- Rendered by diet.js -->
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 VIEW 4: WEARABLE HUB
+                 ============================================================== -->
+            <div id="view-wearable" class="app-view hidden">
+                <div class="view-header">
+                    <div class="view-title-group">
+                        <h2>Wearable Device & Vitals Hub</h2>
+                        <p>Real-time simulated telemetry sync: heart rate waveform, sleep architecture & steps</p>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btn-wearable-sync">
+                        ⚡ Sync Now
+                    </button>
+                </div>
+
+                <div class="wearable-grid">
+                    <!-- Smartwatch Status Card -->
+                    <div class="card wearable-device-card">
+                        <div>
+                            <div class="device-visual-header">
+                                <div class="device-watch-icon">⌚</div>
+                                <div>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                                        <h3 id="wearable-device-name" style="margin: 0;">FitPulse Watch Ultra</h3>
+                                        <span id="wearable-status-badge" class="badge badge-connected">● Connected</span>
+                                    </div>
+                                    <p>Bluetooth 5.3 Low Energy • Model FP-900X</p>
+                                </div>
+                            </div>
+
+                            <div class="battery-meter-wrap">
+                                <span style="font-size: 0.85rem; color: var(--text-secondary);">Battery</span>
+                                <div class="battery-outline">
+                                    <div id="wearable-battery-fill" class="battery-fill" style="width: 88%;"></div>
+                                </div>
+                                <strong id="wearable-battery-val" style="font-size: 0.85rem;">88%</strong>
+                            </div>
+                            <p class="metric-sub" id="wearable-last-sync">Last synced: Just now</p>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+                            <button type="button" class="btn btn-outline-danger" id="btn-wearable-toggle">
+                                Disconnect Device
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live Heart Rate & ECG Waveform Card -->
+                    <div class="card live-hr-card">
+                        <div class="live-hr-header">
+                            <div>
+                                <h3>Live Heart Rate Monitor</h3>
+                                <span class="badge badge-subtle" id="live-hr-zone">Fat Burn Zone</span>
+                            </div>
+                            <span class="badge badge-connected">● Real-Time</span>
+                        </div>
+
+                        <div class="heart-pulsing-wrap">
+                            <div id="live-heart-icon" class="pulsing-heart">♥</div>
+                            <div>
+                                <span id="live-bpm-val" class="bpm-number-display">72</span>
+                                <span class="bpm-unit">BPM</span>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Canvas ECG Wave -->
+                        <div class="ecg-canvas-container">
+                            <canvas id="ecg-canvas" width="450" height="80"></canvas>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                            <span>Resting HR: <strong id="wearable-resting-hr" class="text-cyan">64 bpm</strong></span>
+                            <span>Peak Today: <strong id="wearable-max-hr" class="text-coral">154 bpm</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sleep Architecture & Pattern Tracker -->
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="view-header" style="margin-bottom: 1rem;">
+                        <div>
+                            <h3>Last Night's Sleep Architecture</h3>
+                            <p>Hypnogram breakdown of restorative deep, REM, and light sleep phases</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="metric-val-large text-cyan" id="sleep-total-hours">7h 48m</div>
+                            <span class="badge badge-subtle" id="sleep-score-val">88/100 Optimal</span>
+                        </div>
+                    </div>
+
+                    <!-- Stacked Sleep Stages Bar -->
+                    <div class="sleep-stages-bar-wrap">
+                        <div id="sleep-bar-deep" class="sleep-stage-segment stage-deep" style="width: 24%;" title="Deep Sleep"></div>
+                        <div id="sleep-bar-rem" class="sleep-stage-segment stage-rem" style="width: 25%;" title="REM Sleep"></div>
+                        <div id="sleep-bar-light" class="sleep-stage-segment stage-light" style="width: 45%;" title="Light Sleep"></div>
+                        <div id="sleep-bar-awake" class="sleep-stage-segment stage-awake" style="width: 6%;" title="Awake Time"></div>
+                    </div>
+
+                    <!-- Sleep Legend Grid -->
+                    <div class="sleep-legend-grid">
+                        <div class="sleep-legend-item">
+                            <span class="sleep-legend-dot" style="background: #3b82f6;"></span>
+                            <strong>Deep Sleep</strong>: <span id="sleep-pct-deep">24%</span>
+                            <div class="metric-sub">Physical Repair</div>
+                        </div>
+                        <div class="sleep-legend-item">
+                            <span class="sleep-legend-dot" style="background: #8b5cf6;"></span>
+                            <strong>REM Sleep</strong>: <span id="sleep-pct-rem">25%</span>
+                            <div class="metric-sub">Cognitive & Mood</div>
+                        </div>
+                        <div class="sleep-legend-item">
+                            <span class="sleep-legend-dot" style="background: #06b6d4;"></span>
+                            <strong>Light Sleep</strong>: <span id="sleep-pct-light">45%</span>
+                            <div class="metric-sub">Mental Recovery</div>
+                        </div>
+                        <div class="sleep-legend-item">
+                            <span class="sleep-legend-dot" style="background: #f59e0b;"></span>
+                            <strong>Awake</strong>: <span id="sleep-pct-awake">6%</span>
+                            <div class="metric-sub">Brief Arousals</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 VIEW 5: PROGRESS REPORTS & ANALYTICS
+                 ============================================================== -->
+            <div id="view-analytics" class="app-view hidden">
+                <div class="view-header">
+                    <div class="view-title-group">
+                        <h2>Progress Reports & Trend Analytics</h2>
+                        <p>Evaluate your 7-day consistency, energy expenditure, and weight trajectory</p>
+                    </div>
+                </div>
+
+                <!-- Stats High-Level Grid -->
+                <div class="analytics-stats-grid">
+                    <div class="card metric-card">
+                        <span class="metric-title">Active Streak</span>
+                        <div class="metric-val-large text-coral" id="analytics-streak">7 Days 🔥</div>
+                        <span class="metric-sub">Consistent daily logging</span>
+                    </div>
+                    <div class="card metric-card">
+                        <span class="metric-title">7-Day Step Average</span>
+                        <div class="metric-val-large text-success" id="analytics-avg-steps">10,240</div>
+                        <span class="metric-sub">Target: 10,000 steps</span>
+                    </div>
+                    <div class="card metric-card">
+                        <span class="metric-title">Total Active Burn</span>
+                        <div class="metric-val-large text-cyan" id="analytics-total-burn">2,840 kcal</div>
+                        <span class="metric-sub">Across all workouts</span>
+                    </div>
+                    <div class="card metric-card">
+                        <span class="metric-title">Weight Trajectory</span>
+                        <div class="metric-val-large text-purple" id="analytics-weight-delta">-1.8 kg</div>
+                        <span class="metric-sub">Progress towards target</span>
+                    </div>
+                </div>
+
+                <!-- 4 Interactive Charts Grid -->
+                <div class="charts-grid">
+                    <!-- Chart 1: Steps Trend -->
+                    <div class="card chart-card">
+                        <div class="chart-card-header">
+                            <div>
+                                <h4>Daily Steps (Last 7 Days)</h4>
+                                <span class="metric-sub">Daily step counts vs target</span>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chart-steps"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Calorie Balance -->
+                    <div class="card chart-card">
+                        <div class="chart-card-header">
+                            <div>
+                                <h4>Calorie In vs. Burned</h4>
+                                <span class="metric-sub">Diet intake vs training expenditure</span>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chart-calories"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 3: Weight Trend -->
+                    <div class="card chart-card">
+                        <div class="chart-card-header">
+                            <div>
+                                <h4>Weight Trend (kg)</h4>
+                                <span class="metric-sub">Actual weight vs goal threshold</span>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chart-weight"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 4: Workout Categories -->
+                    <div class="card chart-card">
+                        <div class="chart-card-header">
+                            <div>
+                                <h4>Workout Distribution</h4>
+                                <span class="metric-sub">Breakdown of training categories</span>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chart-categories"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badges & Achievements -->
+                <div class="view-header" style="margin-top: 2rem;">
+                    <div>
+                        <h3>Achievements & Badges</h3>
+                        <p>Milestones reached on your fitness journey</p>
+                    </div>
+                </div>
+                <div id="badges-grid" class="badges-grid">
+                    <!-- Rendered by analytics.js -->
+                </div>
+
+                <!-- Recommendations Full Section -->
+                <div class="view-header" style="margin-top: 2.5rem;">
+                    <div>
+                        <h3>Personalized Health Insights</h3>
+                        <p>Algorithmic recommendations derived from your current vitals and activity</p>
+                    </div>
+                </div>
+                <div id="all-recommendations-list" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Rendered by recommendations.js -->
+                </div>
+            </div>
+
+            <!-- ==============================================================
+                 VIEW 6: GOALS & TARGETS
+                 ============================================================== -->
+            <div id="view-goals" class="app-view hidden">
+                <div class="view-header">
+                    <div class="view-title-group">
+                        <h2>Personal Fitness Goals</h2>
+                        <p>Configure and track your customized daily benchmarks and target weight</p>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btn-open-goals-modal" data-modal-open="modal-edit-goals">
+                        ⚙ Edit Daily Goals
+                    </button>
+                </div>
+
+                <div class="goals-grid">
+                    <!-- Goal 1: Steps -->
+                    <div class="card goal-card" id="goal-card-steps">
+                        <div class="goal-card-header">
+                            <span class="metric-title">Daily Steps</span>
+                            <span class="badge badge-subtle">👟 Movement</span>
+                        </div>
+                        <div>
+                            <div class="goal-card-val text-success">8,420 steps</div>
+                            <div class="goal-card-target">Target: 10,000 steps</div>
+                            <div class="metric-progress-wrap">
+                                <div class="goal-card-bar metric-progress-bar bar-lime" style="width: 84%;"></div>
+                            </div>
+                        </div>
+                        <span class="metric-sub goal-card-pct" style="margin-top: 0.75rem;">84% Completed</span>
+                    </div>
+
+                    <!-- Goal 2: Calorie Budget -->
+                    <div class="card goal-card" id="goal-card-calories">
+                        <div class="goal-card-header">
+                            <span class="metric-title">Calorie Intake</span>
+                            <span class="badge badge-subtle">🥗 Nutrition</span>
+                        </div>
+                        <div>
+                            <div class="goal-card-val text-cyan">1,850 kcal</div>
+                            <div class="goal-card-target">Target: 2,200 kcal</div>
+                            <div class="metric-progress-wrap">
+                                <div class="goal-card-bar metric-progress-bar bar-cyan" style="width: 84%;"></div>
+                            </div>
+                        </div>
+                        <span class="metric-sub goal-card-pct" style="margin-top: 0.75rem;">84% Completed</span>
+                    </div>
+
+                    <!-- Goal 3: Exercise Minutes -->
+                    <div class="card goal-card" id="goal-card-exercise">
+                        <div class="goal-card-header">
+                            <span class="metric-title">Exercise Minutes</span>
+                            <span class="badge badge-subtle">⏱ Training</span>
+                        </div>
+                        <div>
+                            <div class="goal-card-val text-coral">45 min</div>
+                            <div class="goal-card-target">Target: 45 min</div>
+                            <div class="metric-progress-wrap">
+                                <div class="goal-card-bar metric-progress-bar bar-coral" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <span class="metric-sub goal-card-pct" style="margin-top: 0.75rem;">100% Completed</span>
+                    </div>
+
+                    <!-- Goal 4: Hydration -->
+                    <div class="card goal-card" id="goal-card-water">
+                        <div class="goal-card-header">
+                            <span class="metric-title">Hydration</span>
+                            <span class="badge badge-subtle">💧 Fluids</span>
+                        </div>
+                        <div>
+                            <div class="goal-card-val text-cyan">2,100 ml</div>
+                            <div class="goal-card-target">Target: 2,500 ml</div>
+                            <div class="metric-progress-wrap">
+                                <div class="goal-card-bar metric-progress-bar bar-cyan" style="width: 84%;"></div>
+                            </div>
+                        </div>
+                        <span class="metric-sub goal-card-pct" style="margin-top: 0.75rem;">84% Completed</span>
+                    </div>
+
+                    <!-- Goal 5: Sleep Hours -->
+                    <div class="card goal-card" id="goal-card-sleep">
+                        <div class="goal-card-header">
+                            <span class="metric-title">Nightly Sleep</span>
+                            <span class="badge badge-subtle">🌙 Recovery</span>
+                        </div>
+                        <div>
+                            <div class="goal-card-val text-purple">7.8 hrs</div>
+                            <div class="goal-card-target">Target: 8.0 hrs</div>
+                            <div class="metric-progress-wrap">
+                                <div class="goal-card-bar metric-progress-bar bar-purple" style="width: 97%;"></div>
+                            </div>
+                        </div>
+                        <span class="metric-sub goal-card-pct" style="margin-top: 0.75rem;">97% Completed</span>
+                    </div>
+
+                    <!-- Goal 6: Target Weight -->
+                    <div class="card goal-card" id="goal-card-weight">
+                        <div class="goal-card-header">
+                            <span class="metric-title">Body Weight</span>
+                            <span class="badge badge-subtle">⚖ Target</span>
+                        </div>
+                        <div>
+                            <div class="goal-card-val text-success">74.5 kg</div>
+                            <div class="goal-card-target">Target: 70.0 kg</div>
+                            <div class="metric-progress-wrap">
+                                <div class="goal-card-bar metric-progress-bar bar-lime" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <span class="metric-sub goal-card-pct" style="margin-top: 0.75rem;">-4.5 kg remaining to target</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Mobile Bottom Navigation Bar -->
+        <nav class="mobile-nav-bar">
+            <button type="button" class="mobile-nav-item active" data-tab="dashboard">
+                <span class="mobile-nav-icon">📊</span>
+                <span>Dashboard</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-tab="workouts">
+                <span class="mobile-nav-icon">🏋️</span>
+                <span>Workouts</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-tab="diet">
+                <span class="mobile-nav-icon">🥗</span>
+                <span>Nutrition</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-tab="wearable">
+                <span class="mobile-nav-icon">⌚</span>
+                <span>Wearable</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-tab="analytics">
+                <span class="mobile-nav-icon">📈</span>
+                <span>Reports</span>
+            </button>
+            <button type="button" class="mobile-nav-item" data-tab="goals">
+                <span class="mobile-nav-icon">🎯</span>
+                <span>Goals</span>
+            </button>
+        </nav>
+    </section>
+
+    <!-- ==========================================================================
+         MODALS
+         ========================================================================== -->
+
+    <!-- Modal 1: Log Workout -->
+    <div id="modal-log-workout" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Log Workout Session</h3>
+                <button type="button" class="modal-close-btn" data-modal-close>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-log-workout">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wo-type">Exercise Type</label>
+                            <select id="wo-type" class="form-control" required>
+                                <option value="Running">Running</option>
+                                <option value="Cycling">Cycling</option>
+                                <option value="Strength Training">Strength Training</option>
+                                <option value="HIIT">HIIT & Conditioning</option>
+                                <option value="Yoga">Yoga & Flexibility</option>
+                                <option value="Swimming">Swimming</option>
+                                <option value="Walking">Walking</option>
+                                <option value="Boxing">Boxing</option>
+                                <option value="Pilates">Pilates</option>
+                                <option value="Custom">Custom Workout</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="wo-category">Discipline</label>
+                            <select id="wo-category" class="form-control">
+                                <option value="Cardio">Cardio</option>
+                                <option value="Strength">Strength</option>
+                                <option value="HIIT">HIIT</option>
+                                <option value="Cycling">Cycling</option>
+                                <option value="Flexibility">Flexibility</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wo-duration">Duration (minutes)</label>
+                            <input type="number" id="wo-duration" class="form-control" value="30" min="1" max="600" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="wo-intensity">Intensity</label>
+                            <select id="wo-intensity" class="form-control">
+                                <option value="Low">Low Intensity</option>
+                                <option value="Medium" selected>Medium Intensity</option>
+                                <option value="High">High Intensity</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wo-calories">Calories Burned (kcal)</label>
+                            <input type="number" id="wo-calories" class="form-control" value="240" required>
+                            <small style="color: var(--text-muted); font-size: 0.75rem;">Auto-estimated based on MET & weight</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="wo-distance">Distance (km, optional)</label>
+                            <input type="number" id="wo-distance" class="form-control" step="0.1" placeholder="e.g. 5.2">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wo-date">Date</label>
+                            <input type="date" id="wo-date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="wo-time">Time</label>
+                            <input type="text" id="wo-time" class="form-control" placeholder="10:00 AM">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wo-notes">Workout Notes (optional)</label>
+                        <textarea id="wo-notes" class="form-control" placeholder="Targeted sets, PRs, or how you felt..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+                        Save Workout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Log Meal -->
+    <div id="modal-log-meal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Log Meal & Macros</h3>
+                <button type="button" class="modal-close-btn" data-modal-close>&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- 1-Click Quick Food Presets -->
+                <label style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.5rem; display: block;">Quick Presets:</label>
+                <div id="meal-presets-container" class="preset-pills-wrap">
+                    <!-- Injected by diet.js -->
+                </div>
+
+                <form id="form-log-meal">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="meal-name">Food / Meal Name</label>
+                            <input type="text" id="meal-name" class="form-control" placeholder="e.g. Grilled Chicken & Rice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="meal-type">Meal Category</label>
+                            <select id="meal-type" class="form-control">
+                                <option value="Breakfast">Breakfast</option>
+                                <option value="Lunch" selected>Lunch</option>
+                                <option value="Dinner">Dinner</option>
+                                <option value="Snack">Snack</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="meal-calories">Calories (kcal)</label>
+                            <input type="number" id="meal-calories" class="form-control" placeholder="550" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="meal-protein">Protein (g)</label>
+                            <input type="number" id="meal-protein" class="form-control" placeholder="40">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="meal-carbs">Carbohydrates (g)</label>
+                            <input type="number" id="meal-carbs" class="form-control" placeholder="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="meal-fat">Fat (g)</label>
+                            <input type="number" id="meal-fat" class="form-control" placeholder="15">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meal-date">Date</label>
+                        <input type="date" id="meal-date" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+                        Save Meal
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Edit Goals -->
+    <div id="modal-edit-goals" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Customize Fitness Goals</h3>
+                <button type="button" class="modal-close-btn" data-modal-close>&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-edit-goals">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="goal-steps">Daily Step Target</label>
+                            <input type="number" id="goal-steps" class="form-control" step="500" value="10000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goal-calories">Daily Calorie Target</label>
+                            <input type="number" id="goal-calories" class="form-control" step="50" value="2200" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="goal-exercise">Exercise Minutes Target</label>
+                            <input type="number" id="goal-exercise" class="form-control" value="45" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goal-water">Hydration Target (ml)</label>
+                            <input type="number" id="goal-water" class="form-control" step="250" value="2500" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="goal-sleep">Target Sleep (hours)</label>
+                            <input type="number" id="goal-sleep" class="form-control" step="0.5" value="8.0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goal-weight">Target Body Weight (kg)</label>
+                            <input type="number" id="goal-weight" class="form-control" step="0.5" value="70.0" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+                        Save & Apply Goals
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Root Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- JavaScript Application Modules -->
+    <script src="js/utils.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/workouts.js"></script>
+    <script src="js/diet.js"></script>
+    <script src="js/wearable.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/recommendations.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

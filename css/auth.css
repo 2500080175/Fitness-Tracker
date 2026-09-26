@@ -1,0 +1,127 @@
+/**
+ * Fitness Tracker - Authentication Screens Styling
+ */
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    position: relative;
+    background: radial-gradient(circle at 50% 10%, rgba(0, 245, 155, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 85% 85%, rgba(0, 210, 255, 0.06) 0%, transparent 50%),
+                var(--bg-dark);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    backdrop-filter: blur(20px);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    background: var(--gradient-lime);
+    border-radius: var(--radius-md);
+    font-size: 1.75rem;
+    box-shadow: var(--shadow-glow-lime);
+    margin-bottom: 1rem;
+}
+
+.auth-header h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.auth-header p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+}
+
+/* Auth Tabs */
+.auth-tabs {
+    display: flex;
+    background: var(--bg-surface-elevated);
+    border-radius: var(--radius-md);
+    padding: 0.3rem;
+    margin-bottom: 1.75rem;
+    border: 1px solid var(--border-color);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.auth-tab:hover {
+    color: var(--text-primary);
+}
+
+.auth-tab.active {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Quick Demo Box */
+.demo-login-box {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border-color);
+    text-align: center;
+}
+
+.btn-demo {
+    width: 100%;
+    padding: 0.85rem;
+    background: rgba(0, 245, 155, 0.1);
+    color: var(--accent-lime);
+    border: 1px solid rgba(0, 245, 155, 0.3);
+    font-weight: 700;
+    font-size: 0.92rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-demo:hover {
+    background: rgba(0, 245, 155, 0.18);
+    border-color: var(--accent-lime);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow-lime);
+}
+
+.demo-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    display: block;
+}

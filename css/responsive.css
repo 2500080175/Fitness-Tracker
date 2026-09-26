@@ -1,0 +1,144 @@
+/**
+ * Fitness Tracker - Responsive Rules & Mobile Navigation
+ */
+
+/* Mobile Bottom Navigation Bar */
+.mobile-nav-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background: rgba(12, 16, 23, 0.95);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-color);
+    padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom));
+    z-index: 99;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.mobile-nav-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.mobile-nav-item.active {
+    color: var(--accent-lime);
+}
+
+.mobile-nav-item.active .mobile-nav-icon {
+    transform: scale(1.1);
+}
+
+/* Breakpoints */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rings-card {
+        padding: 2rem;
+    }
+
+    .dashboard-lower-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .diet-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wearable-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .goals-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .analytics-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .app-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .header-nav {
+        display: none; /* Replaced by mobile bottom nav */
+    }
+
+    .mobile-nav-bar {
+        display: flex;
+    }
+
+    .main-container {
+        padding: 1.25rem 1rem 6rem;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .workout-stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .macro-bars-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .badges-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .goals-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .timer-display {
+        font-size: 3rem;
+    }
+
+    .auth-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .recommendation-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-recom-action {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}
